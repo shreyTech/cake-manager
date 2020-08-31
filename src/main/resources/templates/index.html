@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cakes Application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        #cakes {
+          font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        #cakes td, #cakes th {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+
+        #cakes tr:nth-child(even){background-color: #f2f2f2;}
+
+        #cakes tr:hover {background-color: #ddd;}
+
+        #cakes th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+          background-color: #4CAF50;
+          color: white;
+        }
+        .button {
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <table id="cakes">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>TITLE</th>
+            <th>DESCRIPTION</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${cakes.empty}">
+            <td colspan="2"> No Cakes Available</td>
+        </tr>
+        <tr th:each="cake : ${cakes}">
+            <td><span th:text="${cake.id}">Id </span></td>
+            <td><span th:text="${cake.title}">Title</span></td>
+            <td><span th:text="${cake.desc}">DESCRIPTION</span></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2><br>Add new cake<br></h2>
+
+    <form action="#" th:action="@{/index}" th:object="${index}" method="post">
+        <label for="title">Title</label><br>
+        <input type="text" id="title" th:field="${newCake.title}"><br>
+        <label for="desc">Description</label><br>
+        <input type="text" id="desc" th:field="${newCake.desc}"><br>
+        <label for="desc">Image</label><br>
+        <input type="text" id="image" th:field="${newCake.image}"></br><br>
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset" />
+    </form>
+
+<!--    <button class="button button1" onclick="alert('Hello world!')">Create Cake</button>-->
+</body>
+</html>
